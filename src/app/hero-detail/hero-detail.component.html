@@ -1,0 +1,18 @@
+<div class="container">
+    <div *ngIf="character">
+        <div class="row">
+            <div class="col-12 col-sm-3">
+                <div *ngFor="let thumbs of character.thumbnails">
+                    <img src="{{thumbs.path}}.{{thumbs.extension}}" class="card-img-top" alt={{character.name}}>
+                </div>
+            </div>
+            <div class="col-12 col-sm-9">
+                <h2>{{character.name | uppercase}}</h2>
+                <p>{{character.description}}</p>
+            </div>
+        </div>
+        <div>
+            <p>{{character.modified}}</p>
+        </div>
+    </div>
+</div>

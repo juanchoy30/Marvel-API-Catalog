@@ -1,0 +1,15 @@
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.card div img {
+    width:199px;
+    height: 250px;
+}
