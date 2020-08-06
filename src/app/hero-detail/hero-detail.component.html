@@ -12,7 +12,10 @@
             </div>
         </div>
         <div>
-            <p>{{character.modified}}</p>
+            <a class="btn btn-info" (click)="goBack()">BACK</a>
+            <a class="btn btn-info" [routerLink]="['/character', prev]">Prev</a>
+            <a class="btn btn-info" [routerLink]="['/character', next]">Next</a>
+
         </div>
     </div>
 </div>

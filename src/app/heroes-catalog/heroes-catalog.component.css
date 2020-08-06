@@ -3,10 +3,29 @@
     margin-bottom: 50px;
 }
 
+.card-container {
+    max-width: 200px;
+    max-height: 300px;
+    margin: 15px;
+}
+
 .card {
     width: 200px;
     height: 300px;
     overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 0.9;
+    z-index: 0.5;
+    margin: 0;
+    padding: 0;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    z-index: 1;
+    opacity: 1;
+    border: 1px solid grey;
 }
 
 .card div img {

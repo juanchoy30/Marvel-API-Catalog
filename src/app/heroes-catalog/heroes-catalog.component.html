@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-4 col-lg-3 mb-3" *ngFor="let character of characters" (click)="onSelect(character)">
-            <div class="card">
+        <div class="col-12 col-md-4 col-lg-3 card-container" *ngFor="let character of characters">
+            <div class="card" [routerLink]="['/character', character.id]">
                 <div *ngFor="let thumbs of character.thumbnails">
                     <img src="{{thumbs.path}}.{{thumbs.extension}}" class="card-img-top" alt={{character.name}}>
                 </div>
@@ -12,4 +12,3 @@
         </div>
     </div>
 </div>
-<app-hero-detail [character]="selectedCharacter"></app-hero-detail>

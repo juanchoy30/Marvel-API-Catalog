@@ -16,7 +16,8 @@ export class HeroesCatalogComponent implements OnInit {
   constructor(private characterService: CharacterService) { }
 
   ngOnInit(): void {
-    this.characters = this.characterService.getCharacters();
+    this.characterService.getCharacters()
+    .subscribe(characters => this.characters = characters);
   }
 
   onSelect(character: Character) {
