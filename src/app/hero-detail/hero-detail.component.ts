@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Character } from '../shared/dataFormat/character';
 import { CharacterService } from '../services/character.service';
@@ -20,6 +21,7 @@ export class HeroDetailComponent implements OnInit {
   constructor(private characterService: CharacterService,
     private route: ActivatedRoute,
     private location: Location) { }
+  allCharacters: Observable<any>;
 
   ngOnInit(): void { 
     this.characterService.getCharacterIds()
@@ -27,6 +29,10 @@ export class HeroDetailComponent implements OnInit {
     this.route.params
       .pipe(switchMap((params:Params) => this.characterService.getCharacter(+params['id'])))
       .subscribe(character => { this.character = character; this.setPrevNext(character.id); });
+  }
+
+  getAllCharacters() {
+    this.allCharacters = this.characterService.getCharacters();
   }
 
   setPrevNext(characterIds: number) {

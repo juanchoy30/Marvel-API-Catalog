@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Character } from '../shared/dataFormat/character';
-import { CHARACTERS } from '../shared/characters';
+import { HttpClient } from '@angular/common/http';
+import { baseURL } from '../shared/baseUrl';
 
 
 @Injectable({
@@ -10,17 +11,20 @@ import { CHARACTERS } from '../shared/characters';
 })
 export class CharacterService {
 
-  constructor() { }
+  URL_API = baseURL;
 
-  getCharacters(): Observable<Character[]> {
-    return of(CHARACTERS).pipe(delay(500));
+  constructor(private http: HttpClient) { }
+
+  getCharacters(): Observable<any> {
+    return this.http.get<any>(this.URL_API)
+    .pipe(map((data: any) => data.data.results));
   }
 
   getCharacter(id: number): Observable<Character> {
-    return of(CHARACTERS.filter((character) => (character.id === id))[0]).pipe(delay(500));
+    return this.http.get<Character>(this.URL_API + 'character/' + id);
   }
 
   getCharacterIds(): Observable<string[] | any> {
-    return of(CHARACTERS.map(character => character.id));
+    return this.getCharacters().pipe(map(characters => characters.map(character => character.id)));
   }
 }

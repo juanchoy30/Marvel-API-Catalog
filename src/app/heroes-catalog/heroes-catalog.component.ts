@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Character } from '../shared/dataFormat/character';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CharacterService } from '../services/character.service';
 
 @Component({
@@ -9,19 +9,15 @@ import { CharacterService } from '../services/character.service';
 })
 export class HeroesCatalogComponent implements OnInit {
 
-  characters: Character[];
-  
-  selectedCharacter: Character;
+  characters: Observable <any>;
 
   constructor(private characterService: CharacterService) { }
 
   ngOnInit(): void {
-    this.characterService.getCharacters()
-    .subscribe(characters => this.characters = characters);
+    this.getAllCharacters();
   }
 
-  onSelect(character: Character) {
-    this.selectedCharacter = character;
+  getAllCharacters() {
+    this.characters = this.characterService.getCharacters();
   }
-
 }
