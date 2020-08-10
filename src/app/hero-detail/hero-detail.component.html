@@ -1,21 +1,19 @@
-<div class="container">
-    <div *ngIf="character">
+<div class="container" *ngIf="character">
+    <div>
         <div class="row">
-            <div class="col-12 col-sm-3">
-                <div *ngFor="let thumbs of character.thumbnails">
-                    <img src="{{thumbs.path}}.{{thumbs.extension}}" class="card-img-top" alt={{character.name}}>
-                </div>
-            </div>
+            <!--<div class="col-12 col-sm-3">
+                <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" class="card-img-top" alt={{character.name}}>
+            </div>-->
             <div class="col-12 col-sm-9">
-                <h2>{{character.name | uppercase}}</h2>
-                <p>{{character.description}}</p>
+                <h2>prueba {{character.name}}</h2>
+                <p>{{character.description}} Prueba 2</p>
             </div>
         </div>
-        <div>
+       <!-- <div>
             <a class="btn btn-info" (click)="goBack()">BACK</a>
             <a class="btn btn-info" [routerLink]="['/character', prev]">Prev</a>
             <a class="btn btn-info" [routerLink]="['/character', next]">Next</a>
 
-        </div>
+        </div>-->
     </div>
 </div>

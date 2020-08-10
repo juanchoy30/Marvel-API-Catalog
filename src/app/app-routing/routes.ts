@@ -3,7 +3,7 @@ import { HeroesCatalogComponent } from '../heroes-catalog/heroes-catalog.compone
 import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 
 export const routes: Routes = [
-    { path: 'catalog', component: HeroesCatalogComponent },
+    { path: 'character-catalog', component: HeroesCatalogComponent },
     { path: 'character/:id', component: HeroDetailComponent },
-    { path: '', redirectTo: '/catalog', pathMatch: 'full'}
+    { path: '', redirectTo: '/character-catalog', pathMatch: 'full'}
 ];

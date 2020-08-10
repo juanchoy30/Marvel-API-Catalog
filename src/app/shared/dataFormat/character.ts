@@ -1,18 +1,11 @@
-import { Thumbnail } from './thumbnail/thumbnails';
-import { Comic } from './comics/comics';
-import { Story } from './stories/stories';
-import { Url } from './url/url';
+import { Data } from './data';
 
 export class Character {
-    id: number;
-    name: string;
-    description: string;
-    modified: string;
-    thumbnails: Thumbnail[];
-    resourceURI: string;
-    comics: Comic[];
-    series: Comic[];
-    stories: Story[];
-    events: Comic[];
-    urls: Url[];
+    code: number;
+    status: string;
+    copyright: string;
+    attributionText: string;
+    attributionHTML: string;
+    etag: string;
+    data: Data[];
 }
