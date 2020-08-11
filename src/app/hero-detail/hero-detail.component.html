@@ -1,14 +1,31 @@
 <div class="container" *ngIf="character">
     <div>
         <div class="row">
-            <!--<div class="col-12 col-sm-3">
-                <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" class="card-img-top" alt={{character.name}}>
-            </div>-->
+            <div class="col-12 col-sm-3">
+                <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" class="img-fluid" alt={{character.name}}>
+            </div>
             <div class="col-12 col-sm-9">
-                <h2>prueba {{character.name}}</h2>
-                <p>{{character.description}} Prueba 2</p>
+                <h2>{{character.name}}</h2>
+                <div id="description">
+                    <div *ngIf="character.description === ''">
+                        <p>Sorry, there seems to be no description for the character</p>
+                    </div>
+                    <div *ngIf="character.description !== ''">
+                        <p>{{character.description}}</p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <app-comics></app-comics>
+
+        <div class="row content-footer">
+            <div class="col-12">
+                <p>If you want to know more, further information at:</p>
+                <a class="btn btn-dark" href="{{character.urls[0].url}}" target="_blank">{{character.urls[0].type | uppercase}}</a>
+            </div>
+        </div>
+
        <!-- <div>
             <a class="btn btn-info" (click)="goBack()">BACK</a>
             <a class="btn btn-info" [routerLink]="['/character', prev]">Prev</a>

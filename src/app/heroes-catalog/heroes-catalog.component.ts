@@ -5,7 +5,7 @@ import { Character } from '../shared/dataFormat/character';
 @Component({
   selector: 'app-heroes-catalog',
   templateUrl: './heroes-catalog.component.html',
-  styleUrls: ['./heroes-catalog.component.css']
+  styleUrls: ['./heroes-catalog.component.scss']
 })
 export class HeroesCatalogComponent implements OnInit {
 
@@ -21,7 +21,6 @@ export class HeroesCatalogComponent implements OnInit {
     this.characterService.getCharacters()
       .subscribe( characters => {
         this.characters = characters;
-        console.log(characters)
     } );
   }
 }

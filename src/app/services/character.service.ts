@@ -19,18 +19,24 @@ export class CharacterService {
 
   constructor(private http: HttpClient) { }
 
-  getCharacters(): Observable<Character[]> {
-    return this.http.get<Character[]>(this.charactersURL)
-    .pipe(map((data: any) => data.data.results));
+  getCharacters(): Observable<Character[] | any> {
+    return this.http.get<Character[] | any>(this.charactersURL)
+      .pipe(map((data: Character | any) => data.data.results));
   }
 
-  getCharacter(id: number): Observable<Character> {
+  getCharacter(id: number): Observable<Character | any> {
     let charactersIdURL = `${baseURL}/${id}?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
-    return this.http.get<Character>(charactersIdURL)
-    .pipe(map((data: any) => data.data.results));
+    return this.http.get<Character | any>(charactersIdURL)
+      .pipe(map((data: Character | any) => data.data.results[0]));
   }
 
-  getCharacterIds():  Observable<string[] | any> {
-    return this.getCharacters().pipe(map((data: any) => data.map(data => data.id)));
+  getComicCharacter(id: number): Observable<any> {
+    let comicsURL = `${baseURL}/${id}/comics?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
+    return this.http.get<any>(comicsURL)
+      .pipe(map((data: Character | any) => data.data.results));
+  }
+
+  getCharacterIds():  Observable<number[] | any> {
+    return this.getCharacters().pipe(map((character) => character.map(character => character.id)));
   }
 }

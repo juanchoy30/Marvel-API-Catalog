@@ -15,6 +15,7 @@ import { CharacterService } from './services/character.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { baseURL } from './shared/baseUrl';
+import { ComicsComponent } from './comics/comics.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { baseURL } from './shared/baseUrl';
     HeroesCatalogComponent,
     HeaderComponent,
     FooterComponent,
-    HeroDetailComponent  
+    HeroDetailComponent,
+    ComicsComponent
   ],
   imports: [
     BrowserModule,
