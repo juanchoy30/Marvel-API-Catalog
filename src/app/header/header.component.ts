@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import { CharacterService } from '../services/character.service'
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  characters: any[];
+
+  constructor(private characterService: CharacterService) { }
 
   ngOnInit(): void {
+  }
+
+  getNamedCharacters(input) {
+    //this.characterService.getCharacterByName()
+    //  .subscribe( characters => {
+    //    this.characters = characters;
+    //} );
   }
 
 }

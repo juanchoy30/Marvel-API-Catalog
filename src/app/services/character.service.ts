@@ -30,12 +30,20 @@ export class CharacterService {
       .pipe(map((data: Character | any) => data.data.results[0]));
   }
 
+  // For the future
+  getCharacterByName (name:string): Observable<any> {
+    let characterByName = `${baseURL}?name=${name}apikey=${publicKey}&ts=${ts}&hash=${hash}`;
+    return this.http.get<any>(characterByName)
+      .pipe(map((data: any) => data.data.results[0]))
+  }
+
   getComicCharacter(id: number): Observable<any> {
     let comicsURL = `${baseURL}/${id}/comics?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<any>(comicsURL)
       .pipe(map((data: Character | any) => data.data.results));
   }
 
+  //For the future
   getCharacterIds():  Observable<number[] | any> {
     return this.getCharacters().pipe(map((character) => character.map(character => character.id)));
   }

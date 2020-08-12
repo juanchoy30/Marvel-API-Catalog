@@ -4,32 +4,93 @@
 }
 
 .card-container {
-    margin-top: 10px;
+    margin: 10px 0px;
     .card {
         width: 100%;
         height: 100%;
         overflow: hidden;
-        transition: 0.3s;
         opacity: 0.9;
         z-index: 0.5;
         margin: 0;
         padding: 0;
-        .card-img-top {
+        font-size: 1rem;
+        .card-img {
             width:100%;
-            //min-height: 250px;
-            //max-height: 250px;
         }
-        h5 {
-            font-size: 0.9rem;
+        .card-body {
+            text-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            ul {
+                margin: 0;
+                padding: 0;
+                li {
+                    list-style: none;
+                    a, a:visited {
+                        color: lightblue;
+                        transition: 0.5s;
+                    }
+                    a:hover {
+                        text-decoration: none;
+                        font-weight: bold;
+                        color: white;
+                    }
+                }
+            }
         }
     }
 }
 
-
-
-.card:hover {
-    transform: scale(1.05);
-    z-index: 1;
-    opacity: 1;
-    border: 1px solid grey;
+//Card flipper
+.flip-card{
+    background-color: transparent;
+    width: 260px;
+    height: 400px;
+    perspective: 1000px;
+    .flip-card-inner{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: inherit;
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+    }
 }
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.scroll-box {
+    overflow-y: scroll;
+    padding: 1rem
+}
+
+// Scroll style
+// width
+::-webkit-scrollbar {
+    width: 5px;
+  }
+
+// Track
+::-webkit-scrollbar-track {
+    background: #8a8a8a; 
+  }
+   
+// Handle
+  ::-webkit-scrollbar-thumb {
+    background: #dbdbdb; 
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #383838; 
+  }
