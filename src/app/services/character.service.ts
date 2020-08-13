@@ -11,7 +11,7 @@ import { Character } from '../shared/dataFormat/character';
 })
 export class CharacterService {
 
-  charactersURL = `${baseURL}?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
+  charactersURL = `${baseURL}?limit=100&apikey=${publicKey}&ts=${ts}&hash=${hash}`;
   /* Public key and HASH are personal, per Marvel Account. If you want to
      run this particular project on your own, you should sing up to Marvel
      https://developer.marvel.com/ and get your keys.
@@ -30,9 +30,9 @@ export class CharacterService {
       .pipe(map((data: Character | any) => data.data.results[0]));
   }
 
-  // For the future
+  // For the name searcher
   getCharacterByName (name:string): Observable<any> {
-    let characterByName = `${baseURL}?name=${name}apikey=${publicKey}&ts=${ts}&hash=${hash}`;
+    let characterByName = `${baseURL}?name=${name}&apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<any>(characterByName)
       .pipe(map((data: any) => data.data.results[0]))
   }

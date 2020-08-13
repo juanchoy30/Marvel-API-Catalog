@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeroesCatalogComponent } from './heroes-catalog/heroes-catalog.component';
@@ -16,6 +17,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { baseURL } from './shared/baseUrl';
 import { ComicsComponent } from './comics/comics.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,16 @@ import { ComicsComponent } from './comics/comics.component';
     HeaderComponent,
     FooterComponent,
     HeroDetailComponent,
-    ComicsComponent
+    ComicsComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     CharacterService,
