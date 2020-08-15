@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { baseURL } from '../shared/baseUrl';
 import { publicKey, ts, hash } from '../shared/validationKeys';
 import { Character } from '../shared/dataFormat/character';
+import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,34 +18,28 @@ export class CharacterService {
      https://developer.marvel.com/ and get your keys.
   */
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private processHttpMsgService: ProcessHTTPMsgService
+    ) { }
 
   getCharacters(): Observable<Character[] | any> {
     return this.http.get<Character[] | any>(this.charactersURL)
-      .pipe(map((data: Character | any) => data.data.results));
+      .pipe(map((data: Character | any) => data.data.results),
+        catchError(this.processHttpMsgService.handleError));
   }
 
   getCharacter(id: number): Observable<Character | any> {
     let charactersIdURL = `${baseURL}/${id}?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<Character | any>(charactersIdURL)
-      .pipe(map((data: Character | any) => data.data.results[0]));
-  }
-
-  // For the name searcher
-  getCharacterByName (name:string): Observable<any> {
-    let characterByName = `${baseURL}?name=${name}&apikey=${publicKey}&ts=${ts}&hash=${hash}`;
-    return this.http.get<any>(characterByName)
-      .pipe(map((data: any) => data.data.results[0]))
+      .pipe(map((data: Character | any) => data.data.results[0]),
+        catchError(this.processHttpMsgService.handleError));
   }
 
   getComicCharacter(id: number): Observable<any> {
     let comicsURL = `${baseURL}/${id}/comics?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<any>(comicsURL)
-      .pipe(map((data: Character | any) => data.data.results));
-  }
-
-  //For the future
-  getCharacterIds():  Observable<number[] | any> {
-    return this.getCharacters().pipe(map((character) => character.map(character => character.id)));
+      .pipe(map((data: Character | any) => data.data.results),
+        catchError(this.processHttpMsgService.handleError));
   }
 }

@@ -34,4 +34,16 @@
         
         </div>
     </div>
+
+    <div [hidden]="comics || errMess">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="sr-only"></span>
+        </div>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+
+    <div *ngIf="errMsg">
+        <h2>Error</h2>
+        <h4>{{errMsg}}</h4>
+    </div>
 </div>

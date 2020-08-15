@@ -15,8 +15,7 @@ export class HeroDetailComponent implements OnInit {
   character: Character | any;
   id: number | any;
   characterIds : number[]  | any;
-  //prev: number;
-  //next: number;3
+  errMsg: string;
 
   constructor(private characterService: CharacterService,
     private route: ActivatedRoute,
@@ -27,26 +26,19 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getTheCharacter() {
-    /*
-    this.characterService.getCharacterIds()
-      .subscribe(characterIds => this.characterIds = characterIds );
-      */
     this.route.params.pipe(switchMap((params: Params) => {
       return this.characterService.getCharacter(params['id'])}))
         .subscribe( character => {
           this.character = character;
+          console.log(character);
+        },
+        errmess => {
+          this.errMsg = <any>errmess;
         });
   }
 
-  //setPrevNext(characterIds: number) {
-  //  const index = this.characterIds.indexOf(characterIds);
-  //  this.prev = this.characterIds[(this.characterIds.length + index - 1) % this.characterIds.length];
-  //  this.next = this.characterIds[(this.characterIds.length + index + 1) % this.characterIds.length];
-
-  //}
-
-  //goBack(): void {
-  //  this.location.back();
-  //}
+  goBack(): void {
+    this.location.back();
+  }
 
 }

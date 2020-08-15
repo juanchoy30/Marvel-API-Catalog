@@ -17,6 +17,7 @@ export class ComicsComponent implements OnInit {
   closeResult: string;
   selectedComic: any;
   newDate: string;
+  errMsg: string;
 
   constructor(private characterService: CharacterService,
     private route: ActivatedRoute,
@@ -31,8 +32,10 @@ export class ComicsComponent implements OnInit {
       return this.characterService.getComicCharacter(params['id'])}))
         .subscribe( comics => {
           this.comics = comics;
+        },
+        errmess => {
+          this.errMsg = <any>errmess;
         });
-    //let Link = this.comics.item.resourceURI.substr(47);
   }
 
   openScrollableContent(longContent) {

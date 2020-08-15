@@ -1,5 +1,5 @@
-<div class="container" *ngIf="character">
-    <div>
+<div class="container">
+    <div *ngIf="character">
         <div class="row">
             <div class="col-12 col-sm-3">
                 <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" class="img-fluid" alt={{character.name}}>
@@ -8,7 +8,7 @@
                 <h2>{{character.name}}</h2>
                 <div id="description">
                     <div *ngIf="character.description === ''">
-                        <p>Sorry, there seems to be no description for the character</p>
+                        <p>Sorry, there seems to be no description for this character</p>
                     </div>
                     <div *ngIf="character.description !== ''">
                         <p>{{character.description}}</p>
@@ -26,11 +26,20 @@
             </div>
         </div>
 
-       <!-- <div>
-            <a class="btn btn-info" (click)="goBack()">BACK</a>
-            <a class="btn btn-info" [routerLink]="['/character', prev]">Prev</a>
-            <a class="btn btn-info" [routerLink]="['/character', next]">Next</a>
 
-        </div>-->
+            <a class="btn btn-info" (click)="goBack()">BACK</a>
+        
+    </div>
+
+    <div [hidden]="character || errMess">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="sr-only"></span>
+        </div>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+
+    <div *ngIf="errMsg">
+        <h2>Error</h2>
+        <h4>{{errMsg}}</h4>
     </div>
 </div>

@@ -10,6 +10,7 @@ import { Character } from '../shared/dataFormat/character';
 export class HeroesCatalogComponent implements OnInit {
 
   characters: Character[];
+  errMsg: string;
 
   constructor(private characterService: CharacterService) { }
 
@@ -21,6 +22,9 @@ export class HeroesCatalogComponent implements OnInit {
     this.characterService.getCharacters()
       .subscribe( characters => {
         this.characters = characters;
-    } );
+        },
+        errmess => {
+          this.errMsg = <any>errmess;
+        });
   }
 }
