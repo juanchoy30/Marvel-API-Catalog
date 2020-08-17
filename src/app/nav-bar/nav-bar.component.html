@@ -1,4 +1,4 @@
-<div>
+<div #navbar>
         <a class="btn btn-dark" routerLink='/character-catalog'>Catalog</a>
 
         <div class="form-group">
@@ -12,11 +12,16 @@
                 [resultFormatter]="resultFormatBandListValue"
                 [inputFormatter]="inputFormatBandListValue"
                 #instance="ngbTypeahead"
+                #SearchInput
                 >
         </div>
 
+        <div [hidden]="characterData">
+            <button class="btn btn-primary" disabled>Search</button>
+        </div>
+
         <div *ngIf="characterData">
-            <button class="btn btn-primary" [routerLink]="['/character', characterData.id]">Search</button>
+            <button class="btn btn-primary" (click)="submit(characterData.id)">Search</button>
         </div>
 
 
