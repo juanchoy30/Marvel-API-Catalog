@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { baseURL } from '../shared/baseUrl';
 import { publicKey, ts, hash } from '../shared/validationKeys';
-import { Character } from '../shared/dataFormat/character';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
@@ -23,23 +22,23 @@ export class CharacterService {
     private processHttpMsgService: ProcessHTTPMsgService
     ) { }
 
-  getCharacters(): Observable<Character[] | any> {
-    return this.http.get<Character[] | any>(this.charactersURL)
-      .pipe(map((data: Character | any) => data.data.results),
+  getCharacters(): Observable<any> {
+    return this.http.get<any>(this.charactersURL)
+      .pipe(map((data:any) => data.data.results),
         catchError(this.processHttpMsgService.handleError));
   }
 
-  getCharacter(id: number): Observable<Character | any> {
+  getCharacter(id: number): Observable<any> {
     let charactersIdURL = `${baseURL}/${id}?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
-    return this.http.get<Character | any>(charactersIdURL)
-      .pipe(map((data: Character | any) => data.data.results[0]),
+    return this.http.get<any>(charactersIdURL)
+      .pipe(map((data:any) => data.data.results[0]),
         catchError(this.processHttpMsgService.handleError));
   }
 
   getComicCharacter(id: number): Observable<any> {
     let comicsURL = `${baseURL}/${id}/comics?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<any>(comicsURL)
-      .pipe(map((data: Character | any) => data.data.results),
+      .pipe(map((data:any) => data.data.results),
         catchError(this.processHttpMsgService.handleError));
   }
 }

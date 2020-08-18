@@ -1,4 +1,23 @@
 <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <ngb-pagination
+            class="d-flex justify-content-center"
+            (pageChange)="getCharactersByLetter($event)"
+            [collectionSize]="collectionSize"
+            [(page)]="page"
+            [(maxSize)]="maxSize" 
+            [rotate]="true" 
+            [ellipses]="false"
+            [boundaryLinks]="true"
+            [(size)]="size">
+            <ng-template ngbPaginationNumber let-p>{{ getPageSymbol(p) }}</ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+
+
+
     <div class="row" *ngIf="characters">
         <div class="col-12 col-md-4 col-lg-3 card-container" *ngFor="let character of characters">
             <div class="card" [routerLink]="['/character', character.id]">

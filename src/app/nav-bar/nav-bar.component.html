@@ -1,28 +1,31 @@
-<div #navbar>
-        <a class="btn btn-dark" routerLink='/character-catalog'>Catalog</a>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink='/character-catalog'>Catalog</a>
+            </li>
+        </ul>
 
-        <div class="form-group">
-            <label for="character-name">Search Character</label>
+        <div class="form-inline my-2 my-lg-0 mr-2">
             <input type="text" 
                 id="character-name" 
                 class="form-control" 
-                placeholder="e.g. Spider-Man" 
+                placeholder="Search Character" 
                 [formControl]="queryField"
                 [ngbTypeahead]="search"                     
                 [resultFormatter]="resultFormatBandListValue"
                 [inputFormatter]="inputFormatBandListValue"
+                (selectItem)="selectedItem($event)"
                 #instance="ngbTypeahead"
-                #SearchInput
-                >
-        </div>
+                #SearchInput>
 
+        </div>
+        
         <div [hidden]="characterData">
             <button class="btn btn-primary" disabled>Search</button>
         </div>
-
+    
         <div *ngIf="characterData">
             <button class="btn btn-primary" (click)="submit(characterData.id)">Search</button>
         </div>
-
-
-</div>
+</nav>

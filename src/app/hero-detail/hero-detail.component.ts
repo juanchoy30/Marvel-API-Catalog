@@ -3,7 +3,6 @@ import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { CharacterService } from '../services/character.service';
-import { Character } from '../shared/dataFormat/character';
 
 @Component({
   selector: 'app-hero-detail',
@@ -12,7 +11,7 @@ import { Character } from '../shared/dataFormat/character';
 })
 export class HeroDetailComponent implements OnInit {
 
-  character: Character | any;
+  character: any;
   id: number | any;
   characterIds : number[]  | any;
   errMsg: string;
