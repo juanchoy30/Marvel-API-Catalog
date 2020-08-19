@@ -2,3 +2,21 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+$marvelColor: #F0131E;
+$borderColor: rgb(107, 107, 107);
+$textBackground: rgba(253, 253, 253, 0.931);
+
+header.jumbotron {
+    background: $marvelColor;
+    color: white;
+}
+
+body {
+    background-image: url('../src/assets/images/pngguru.com.png');
+}
+
+div.descriptionBox {
+    background-color: $textBackground;
+    border: 2px solid $borderColor;
+}

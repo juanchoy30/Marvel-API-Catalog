@@ -48,6 +48,9 @@ export class HeroesCatalogComponent implements OnInit {
       .subscribe(characters => {
         this.characters = characters;
         console.log(this.characters);
+      },
+      errmess => {
+        this.errMsg = <any>errmess;
       });
   }
 

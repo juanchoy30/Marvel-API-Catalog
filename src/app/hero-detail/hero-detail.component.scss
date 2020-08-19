@@ -1,4 +1,23 @@
+@import '../../styles.scss';
+
 .container {
     margin-top: 50px;
     margin-bottom: 50px;
+    .descriptionBox, div.row img {
+        border-radius: 5px 5px 5px 5px;
+    }
+}
+
+div.row img {
+    border: 2px solid $borderColor;
+}
+
+a, a:visited {
+    color: rgb(111, 215, 250);
+    transition: 0.5s;
+}
+a:hover {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(243, 87, 87);
 }

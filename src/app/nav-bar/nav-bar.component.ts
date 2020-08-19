@@ -14,10 +14,12 @@ export class NavBarComponent implements OnInit {
 
   @ViewChild( 'SearchInput', {static: true}) searchInput: ElementRef;
 
-  characterData: any;
+  characterData: any;            // Character data definition
   queryField: FormControl = new FormControl();
-  isSearching: boolean;
-  clickedItem:string;
+  isSearching: boolean;          // Filters the trigger of the GET call
+  clickedItem:string;            // Defined to handle clickable input sugestions
+  errMsg: string;                // This handdles the http error
+  public isMenuCollapsed = true; // This is made to make the navbar collapasable
 
   constructor(
     private searchService: SearchServiceService,
@@ -44,6 +46,10 @@ export class NavBarComponent implements OnInit {
             this.isSearching = false;
             this.characterData = characterData;
             console.log(this.characterData);
+          },
+          errmess => {
+            this.errMsg = <any>errmess;
+            console.log(this.characterData);
           })
       });
   }
@@ -68,7 +74,7 @@ export class NavBarComponent implements OnInit {
 
   inputFormatBandListValue(value: any)   {
     if(value.name)
-      return value.name
+      return value.name;
       return value;
   }
 
@@ -81,14 +87,14 @@ export class NavBarComponent implements OnInit {
     .subscribe(characterData => {
       this.characterData = characterData;
       console.log(this.characterData);
-    })
+    });
 
   }
 
   // This submition method will allow the search button to appear with the
   // correspondent url
   submit(id: any){
-    this.router.navigate(['/character', id]) //your router URL need to pass it here
+    this.router.navigate(['/character', id]); //your router URL need to pass it here
   }
 
 }

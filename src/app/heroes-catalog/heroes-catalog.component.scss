@@ -1,35 +1,41 @@
+@import '../../styles.scss';
+
+$width: 260px;
+$height: $width*1.304;
+$imageHeight: $height*0.82;
+
 .container {
     margin-top: 50px;
     margin-bottom: 50px;
-}
-
-.card-container {
-    max-width: 230px;
-    max-height: 300px;
-    margin: 10px;
-}
-
-.card {
-    width: 230px;
-    height: 300px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: 0.3s;
-    opacity: 0.9;
-    z-index: 0.5;
-    margin: 0;
-    padding: 0;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    z-index: 1;
-    opacity: 1;
-    border: 1px solid grey;
-}
-
-.card-img-top {
-    width:100%;
-    min-height: 250px;
-    max-height: 250px;
+    .card-container {
+        max-width: $width;
+        max-height: $height;
+        margin: 10px;
+        .card {
+            width: $width;
+            height: $height;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            opacity: 0.9;
+            z-index: 0.5;
+            margin: 0;
+            padding: 0;
+            border: 1px solid $borderColor;
+            .card-text {
+                font-size: 1rem;
+            }
+            .card-img-top {
+                width:100%;
+                min-height: $imageHeight;
+                max-height: $imageHeight;
+            }
+        }
+        .card:hover {
+            transform: scale(1.05);
+            z-index: 1;
+            opacity: 1;
+            border: 2px solid $marvelColor;
+        }
+    }
 }

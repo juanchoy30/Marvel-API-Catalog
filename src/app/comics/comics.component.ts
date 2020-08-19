@@ -13,6 +13,7 @@ import { CharacterService } from '../services/character.service';
 export class ComicsComponent implements OnInit {
 
   comics: any;
+  events: any;
   id: number | any;
   closeResult: string;
   selectedComic: any;
@@ -25,6 +26,7 @@ export class ComicsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getComics();
+    this.getEvents();
   }
 
   getComics() {
@@ -32,6 +34,17 @@ export class ComicsComponent implements OnInit {
       return this.characterService.getComicCharacter(params['id'])}))
         .subscribe( comics => {
           this.comics = comics;
+        },
+        errmess => {
+          this.errMsg = <any>errmess;
+        });
+  }
+
+  getEvents() {
+    this.route.params.pipe(switchMap((params: Params) => {
+      return this.characterService.getEventsCharacter(params['id'])}))
+        .subscribe( events => {
+          this.events = events;
         },
         errmess => {
           this.errMsg = <any>errmess;

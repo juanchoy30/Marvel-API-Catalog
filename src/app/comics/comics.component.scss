@@ -1,3 +1,5 @@
+@import '../../styles.scss';
+
 .container {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -9,11 +11,12 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        opacity: 0.9;
+        opacity: 1  ;
         z-index: 0.5;
         margin: 0;
         padding: 0;
         font-size: 1rem;
+        border: 1px solid $borderColor;
         .card-img {
             width:100%;
             min-height: 400px;
@@ -27,13 +30,13 @@
                 li {
                     list-style: none;
                     a, a:visited {
-                        color: lightblue;
+                        color: rgb(111, 215, 250);
                         transition: 0.5s;
                     }
                     a:hover {
                         text-decoration: none;
                         font-weight: bold;
-                        color: white;
+                        color: rgb(243, 87, 87);
                     }
                 }
             }
@@ -53,7 +56,7 @@
         height: 100%;
         transition: transform 1s;
         transform-style: preserve-3d;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        box-shadow: 6px 4px 27px -8px rgba(0,0,0,0.8);
         .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;

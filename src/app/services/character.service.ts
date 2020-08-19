@@ -21,7 +21,7 @@ export class CharacterService {
     private http: HttpClient,
     private processHttpMsgService: ProcessHTTPMsgService
     ) { }
-
+// Not in use at the moment
   getCharacters(): Observable<any> {
     return this.http.get<any>(this.charactersURL)
       .pipe(map((data:any) => data.data.results),
@@ -37,6 +37,13 @@ export class CharacterService {
 
   getComicCharacter(id: number): Observable<any> {
     let comicsURL = `${baseURL}/${id}/comics?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
+    return this.http.get<any>(comicsURL)
+      .pipe(map((data:any) => data.data.results),
+        catchError(this.processHttpMsgService.handleError));
+  }
+
+  getEventsCharacter(id: number): Observable<any> {
+    let comicsURL = `${baseURL}/${id}/events?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<any>(comicsURL)
       .pipe(map((data:any) => data.data.results),
         catchError(this.processHttpMsgService.handleError));
