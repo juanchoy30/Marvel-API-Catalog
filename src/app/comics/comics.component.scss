@@ -1,17 +1,61 @@
 @import '../../styles.scss';
+//Carousel
 
-//.carousel-item.active {
-//    width: 100%;
-//    border: solid 0.3em;
-//    border-color: red;
-//  } verify to change the carousel style
-
-
-.container {
-    margin-top: 50px;
-    margin-bottom: 50px;
+div.CarouselContent {
+  background-color: $textBackground;
+  border: 2px solid $borderColor;
+  h2, p {
+    margin: 8px 15px
+  }
 }
 
+.carousel {
+    position: relative;
+    text-align: center;
+    .carousel-indicators {
+      background-color: #00000049;
+      position: absolute;
+      top:400px;
+      margin: 0;
+    }
+    .carousel-inner {
+        justify-content:  center;
+        overflow: visible;
+    }
+    .carousel-control-next, .carousel-control-prev {
+        background-color: #000000;
+        box-shadow: 0px 0px 24px 8px rgba(255,255,255,0.78);
+        border-radius: 50%;
+        position: absolute;
+        top:190px;
+        width: 60px;
+        height: 60px;
+    }
+    .carousel-control-next {
+      right: -20px;
+    }
+    .carousel-control-prev{
+      left: -20px;
+    }
+  } 
+.carousel-item {
+    display: block; // This doesn´t let the card flip
+    z-index: 1;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1.5s easy-in-out, visibility 1s;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+.carousel-item.active {
+    position: relative;
+    transition: opacity 1.5s easy-in-out, visibility 1s;
+    visibility: visible;
+    opacity: 1;
+}
+
+  // Card
 .card-container {
     margin: 10px 0px;
     .card {
@@ -50,6 +94,8 @@
         }
     }
 }
+
+
 
 //Card flipper
 .flip-card{

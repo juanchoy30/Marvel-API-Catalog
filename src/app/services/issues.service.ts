@@ -17,7 +17,7 @@ export class IssuesService {
 
 
   getComicCharacter(id: number): Observable<any> {
-    let comicsURL = `${baseURL}/${id}/comics?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
+    let comicsURL = `${baseURL}/${id}/comics?limit=30&apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<any>(comicsURL)
       .pipe(map((data:any) => data.data),
         catchError(this.processHttpMsgService.handleError));
@@ -25,7 +25,7 @@ export class IssuesService {
   // The data is not being formated so the number of items of the JSON file is available
   
   getEventsCharacter(id: number): Observable<any> {
-    let comicsURL = `${baseURL}/${id}/events?apikey=${publicKey}&ts=${ts}&hash=${hash}`;
+    let comicsURL = `${baseURL}/${id}/events?limit=30&apikey=${publicKey}&ts=${ts}&hash=${hash}`;
     return this.http.get<any>(comicsURL)
       .pipe(map((data:any) => data.data),
         catchError(this.processHttpMsgService.handleError));

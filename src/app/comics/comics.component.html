@@ -1,59 +1,61 @@
-<div class="container">
-    <h3>Comics</h3>
-    <ngb-carousel class="col-12" *ngIf="comics">
-        <ng-template ngbSlide *ngFor="let comic of comics.results | slice:0:(comics.count-forNumber); let i = index">
-            <!--slice permits to cut the number of iterations starting with zero. 3 have to be substracted of the last one in order to avoid empty places-->
-            <div class="row">
-
-                <div [(class)]="class" *ngFor="let comic of comics.results| slice:i:i+shownNumber">
-                    <div class="flip-card" >
-                        <div class="flip-card-inner">
-                            <div class="card flip-card-front">
-                                <img src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" class="card-img" alt="{{comic.title}}">
-                            </div>
-                
-                            <div class="card bg-light-gray flip-card-back">
-                                <div class="card-body scroll-box">
-                                    <h5 class="card-title">{{ comic.title }}</h5>
-        
-                                    <p class="card-text"> {{ comic.description }}</p>
-        
-                                    <h6 class="mt-3">Creators:</h6>
-                                    <ul> <!--This double for is made so the creators data can be accessed-->
-                                        <ng-container *ngFor="let item of comics.results.creators">
-                                            <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                        </ng-container>
-                                    </ul>
-        
-                                    <h6 class="mt-3">Character appearances:</h6>
-                                    <ul>
-                                        <ng-container *ngFor="let item of comics.results.characters">
-                                            <li *ngFor="let character of items.items">
-                                                <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                    {{ character.name }}
-                                                </a>
-                                            </li>
-                                        </ng-container>
-                                    </ul>
+<div>
+    <!--Comics-->
+    <div class="CarouselContent my-5" *ngIf="comics && resultsComics > 1">
+        <h2>Comics</h2>
+        <ngb-carousel class="col-12">
+            <ng-template ngbSlide *ngFor="let comic of comics.results | slice:0:(comics.count-forNumber); let i = index">
+                <!--slice permits to cut the number of iterations starting with zero. 3 have to be substracted of the last one in order to avoid empty places-->
+                <div class="row carouselRow">
+                    <div [(class)]="class" *ngFor="let comic of comics.results| slice:i:i+shownNumber">
+                        <div class="flip-card" >
+                            <div class="flip-card-inner">
+                                <div class="card flip-card-front">
+                                    <img src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" class="card-img" alt="{{comic.title}}">
+                                </div>
+                    
+                                <div class="card bg-light-gray flip-card-back">
+                                    <div class="card-body scroll-box">
+                                        <h5 class="card-title">{{ comic.title }}</h5>
+            
+                                        <p class="card-text"> {{ comic.description }}</p>
+            
+                                        <h6 class="mt-3">Creators:</h6>
+                                        <ul> <!--This double for is made so the creators data can be accessed-->
+                                            <ng-container *ngFor="let item of comics.results.creators">
+                                                <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
+                                            </ng-container>
+                                        </ul>
+            
+                                        <h6 class="mt-3">Character appearances:</h6>
+                                        <ul>
+                                            <ng-container *ngFor="let item of comics.results.characters">
+                                                <li *ngFor="let character of items.items">
+                                                    <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                        {{ character.name }}
+                                                    </a>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </ng-template>
+        </ngb-carousel> 
+    </div>
 
-                
+    <!--This template appears if the number of issues is 0-->
+    <div class="CarouselContent my-5" *ngIf="comics && resultsComics === 0">
+        <p>Sorry there are no comics available for this character</p>
+    </div>
 
-            </div>
-        </ng-template>
-    </ngb-carousel>
-
-
-    <div class="content">
-        <h3>Comics</h3>
-        <div class="row" id="comics" *ngIf="comics">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 card-container" *ngFor="let comic of comics.results">
-                
-                <div class="flip-card">
+    <div class="CarouselContent my-5" *ngIf="comics && resultsComics === 1">
+        <h2>Comics</h2>
+        <div class="row">
+            <div class="card-container d-flex justify-content-around col-12" *ngFor="let comic of comics.results">
+                <div class="flip-card" >
                     <div class="flip-card-inner">
                         <div class="card flip-card-front">
                             <img src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" class="card-img" alt="{{comic.title}}">
@@ -66,50 +68,104 @@
                                 <p class="card-text"> {{ comic.description }}</p>
     
                                 <h6 class="mt-3">Creators:</h6>
-                                    <ul>
-                                        <ng-container *ngFor="let item of comics.results.creators">
-                                            <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                        </ng-container>
-                                    </ul>
-        
-                                    <h6 class="mt-3">Character appearances:</h6>
-                                    <ul>
-                                        <ng-container *ngFor="let item of comics.results.characters">
-                                            <li *ngFor="let character of items.items">
-                                                <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                    {{ character.name }}
-                                                </a>
-                                            </li>
-                                        </ng-container>
-                                    </ul>
+                                <ul> <!--This double for is made so the creators data can be accessed-->
+                                    <ng-container *ngFor="let item of comics.results.creators">
+                                        <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
+                                    </ng-container>
+                                </ul>
+    
+                                <h6 class="mt-3">Character appearances:</h6>
+                                <ul>
+                                    <ng-container *ngFor="let item of comics.results.characters">
+                                        <li *ngFor="let character of items.items">
+                                            <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                {{ character.name }}
+                                            </a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            
             </div>
-        </div>
-    
-        <div [hidden]="comics || errMess">
-            <div class="spinner-grow text-danger" role="status">
-              <span class="sr-only"></span>
-            </div>
-            <h4>Loading . . . Please Wait</h4>
-        </div>
-    
-        <div *ngIf="errMsg">
-            <h2>Error</h2>
-            <h4>{{errMsg}}</h4>
         </div>
     </div>
 
+    <!--Loading-->
+    <div [hidden]="comics || errMess" class="Loading CarouselContent m-5">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="sr-only"></span>
+        </div>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+    <!-- Error -->
+    <div *ngIf="errMsg" class="Loading CarouselContent m-5">
+        <h2>Error</h2>
+        <h4>{{errMsg}}</h4>
+    </div>
 
-    <div class="content mt-5">
-        <h3>Events</h3>
-        <div class="row" id="events" *ngIf="events">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 card-container" *ngFor="let event of events">
-                
-                <div class="flip-card">
+
+
+
+
+    <!--Events-->
+    <div class="CarouselContent my-5" *ngIf="events && resultsEvents > 1">
+        <h2>Events</h2>
+        <ngb-carousel class="col-12">
+            <ng-template ngbSlide *ngFor="let event of events.results | slice:0:(events.count-forNumberE); let i = index">
+                <!--slice permits to cut the number of iterations starting with zero. 3 have to be substracted of the last one in order to avoid empty places-->
+                <div class="row carouselRow">
+                    <div [(class)]="class" *ngFor="let event of events.results| slice:i:i+shownNumberE">
+                        <div class="flip-card" >
+                            <div class="flip-card-inner">
+                                <div class="card flip-card-front">
+                                    <img src="{{event.thumbnail.path}}.{{event.thumbnail.extension}}" class="card-img" alt="{{event.title}}">
+                                </div>
+                    
+                                <div class="card bg-light-gray flip-card-back">
+                                    <div class="card-body scroll-box">
+                                        <h5 class="card-title">{{ event.title }}</h5>
+            
+                                        <p class="card-text"> {{ event.description }}</p>
+            
+                                        <h6 class="mt-3">Creators:</h6>
+                                        <ul> <!--This double for is made so the creators data can be accessed-->
+                                            <ng-container *ngFor="let item of events.results.creators">
+                                                <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
+                                            </ng-container>
+                                        </ul>
+            
+                                        <h6 class="mt-3">Character appearances:</h6>
+                                        <ul>
+                                            <ng-container *ngFor="let item of events.results.characters">
+                                                <li *ngFor="let character of items.items">
+                                                    <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                        {{ character.name }}
+                                                    </a>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-carousel> 
+    </div>
+
+    <!--This template appears if the number of issues is 0-->
+    <div class="CarouselContent my-5" *ngIf="events && resultsEvents === 0">
+        <p>Sorry there are no events available for this character</p>
+    </div>
+
+    <div class="CarouselContent my-5" *ngIf="events && resultsEvents === 1">
+        <h2>Events</h2>
+        <div class="row">
+            <div class="card-container d-flex justify-content-around col-12" *ngFor="let event of events.results">
+                <div class="flip-card" >
                     <div class="flip-card-inner">
                         <div class="card flip-card-front">
                             <img src="{{event.thumbnail.path}}.{{event.thumbnail.extension}}" class="card-img" alt="{{event.title}}">
@@ -122,37 +178,45 @@
                                 <p class="card-text"> {{ event.description }}</p>
     
                                 <h6 class="mt-3">Creators:</h6>
-                                <ul *ngFor="let creator of event.creators.items">
-                                    <li>{{ creator.name }} ({{ creator.role }})</li>
+                                <ul> <!--This double for is made so the creators data can be accessed-->
+                                    <ng-container *ngFor="let item of events.results.creators">
+                                        <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
+                                    </ng-container>
                                 </ul>
     
                                 <h6 class="mt-3">Character appearances:</h6>
-                                <ul *ngFor="let character of event.characters.items">
-                                    <li>
-                                        <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                            {{ character.name }}
-                                        </a>
-                                    </li>
+                                <ul>
+                                    <ng-container *ngFor="let item of events.results.characters">
+                                        <li *ngFor="let character of items.items">
+                                            <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                {{ character.name }}
+                                            </a>
+                                        </li>
+                                    </ng-container>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            
             </div>
-        </div>
-    
-        <div [hidden]="events || errMess">
-            <div class="spinner-grow text-danger" role="status">
-              <span class="sr-only"></span>
-            </div>
-            <h4>Loading . . . Please Wait</h4>
-        </div>
-    
-        <div *ngIf="errMsg">
-            <h2>Error</h2>
-            <h4>{{errMsg}}</h4>
         </div>
     </div>
+
+
+    <div [hidden]="events || errMess" class="Loading CarouselContent m-5">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="sr-only"></span>
+        </div>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+
+    <div *ngIf="errMsg" class="Loading CarouselContent m-5">
+        <h2>Error</h2>
+        <h4>{{errMsg}}</h4>
+    </div>
+
+
     
+
+        
 </div>
