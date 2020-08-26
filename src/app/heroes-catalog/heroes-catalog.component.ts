@@ -1,4 +1,5 @@
 import { Component, OnInit, ContentChild, HostListener  } from '@angular/core';
+import { Location } from '@angular/common';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { SearchServiceService } from '../services/search-service.service';
 
@@ -26,7 +27,8 @@ export class HeroesCatalogComponent implements OnInit {
   errMsg: string;
 
   constructor(
-    private searchService: SearchServiceService) { }
+    private searchService: SearchServiceService,
+    private location: Location) { }
 
   ngOnInit(): void {
     this.getCharactersByLetter(this.page);

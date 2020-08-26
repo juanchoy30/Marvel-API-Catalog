@@ -1,4 +1,25 @@
-<div class="container-fluid">
-    <p>footer works!</p>
+<div class="container-fluid bg-dark footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-6 col-lg-3">
+                <ul>
+                    <li class="footer-item" routerLinkActive="active">
+                        <a class="footer-link" routerLink='/home'>Home</a>
+                     </li>
+                    <li class="footer-item" routerLinkActive="active">
+                        <a class="footer-link" routerLink='/character-catalog'>Catalog</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex justify-content-center col-12">
+                <a class="attrLink" href="{{info.attributionHTML.substring(9,26)}}" target="_blank">{{info.attributionText}}</a>
+            </div>
+    
+        </div>
+    </div>
+
+
 
 </div>

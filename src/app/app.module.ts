@@ -13,6 +13,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
 import { CharacterService } from './services/character.service';
 import { SearchServiceService } from './services/search-service.service';
+import { IssuesService } from './services/issues.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -46,6 +47,7 @@ import { HomeComponent } from './home/home.component';
   providers: [
     CharacterService,
     SearchServiceService,
+    IssuesService,
     ProcessHTTPMsgService,
     { provide: 'BaseURL', useValue: baseURL }
   ],

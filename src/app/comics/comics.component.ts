@@ -16,16 +16,22 @@ export class ComicsComponent implements OnInit {
   comics: any;
   events: any;
   series: any;
+
   resultsComics: any;         // Comics result counter (Number of comics)
   resultsEvents: any;         // Event result counter (Number of events)
   resultsSeries: any;         // Series result counter (Number of Series)
+
   id: number | any;
   closeResult: string;
   selectedComic: any;
   newDate: string;
   errMsg: string;
-  class: string;                 // Style of carousel
+
+  Comicsclass: string;                 // Style of carousel
+  Eventsclass: string;                 // Style of carousel
+  Seriescslass: string;                 // Style of carousel
   hiddenClass: string;                 // Style of carousel
+
   @Input() shownNumber: number;  // To size the carousel
   @Input() forNumber: number;    // To size the carousel
   @Input() shownNumberE: number; // To size the carousel
@@ -40,13 +46,15 @@ export class ComicsComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.getComics();
-    this.getEvents();
-    this.getSeries();
+    const width= window.screen.availWidth;
+    console.log(width);
+    this.getComics(width);
+    this.getEvents(width);
+    this.getSeries(width);
   }
   
 
-  getComics() {
+  getComics( width: any ) {
     this.route.params.pipe(switchMap((params: Params) => {
       return this.issuesService.getComicCharacter(params['id'])}))
         .subscribe( comics => {
@@ -55,7 +63,7 @@ export class ComicsComponent implements OnInit {
           if ( this.resultsComics <= 1) { //This if avoids the changeSize function if the number of issues is less or equal to 1
             console.log(this.resultsComics);
           } else {
-            this.changeSizeComics(window.screen.width, this.resultsComics); // This function sizes the carousel
+            this.changeSizeComics(width, this.resultsComics); // This function sizes the carousel
           }
         },
         errmess => {
@@ -63,16 +71,15 @@ export class ComicsComponent implements OnInit {
         });
   }
 
-  getEvents() {
+  getEvents(width: any) {
     this.route.params.pipe(switchMap((params: Params) => {
       return this.issuesService.getEventsCharacter(params['id'])}))
         .subscribe( events => {
           this.events = events;
           this.resultsEvents = this.events.count;
           if ( this.resultsEvents <= 1) { //This if avoids the changeSize function if the number of issues is less or equal to 1
-            console.log(this.resultsEvents);
           } else {
-            this.changeSizeEvents(window.screen.width, this.resultsEvents); // This function sizes the carousel
+            this.changeSizeEvents(width, this.resultsEvents); // This function sizes the carousel
           }
         },
         errmess => {
@@ -80,7 +87,7 @@ export class ComicsComponent implements OnInit {
         });
   }
 
-  getSeries() {
+  getSeries(width:any) {
     this.route.params.pipe(switchMap((params: Params) => {
       return this.issuesService.getSeriesCharacter(params['id'])}))
         .subscribe( series => {
@@ -89,14 +96,13 @@ export class ComicsComponent implements OnInit {
           if ( this.resultsSeries <= 1) { //This if avoids the changeSize function if the number of issues is less or equal to 1
             console.log(this.resultsSeries);
           } else {
-            this.changeSizeSeries(window.screen.width, this.resultsSeries); // This function sizes the carousel
+            this.changeSizeSeries(width, this.resultsSeries); // This function sizes the carousel
           }
         },
         errmess => {
           this.errMsg = <any>errmess;
         });
   }
-
   
 
   openScrollableContent(longContent) {
@@ -107,209 +113,129 @@ export class ComicsComponent implements OnInit {
   onResize(event: any) {
     this.changeSizeComics(event.target.innerWidth, this.comics.count);
     this.changeSizeEvents(event.target.innerWidth, this.events.count);
+    this.changeSizeSeries(event.target.innerWidth, this.series.count)
   }
 
   // changing size for comics
   changeSizeComics(arg: any, counter: number) {
-    if (arg <= 375) {   //Screen Size
-      this.class = 'card-container d-flex justify-content-around col-12';
+    if (arg <= 767) {   //Screen Size
+      this.Comicsclass = 'card-container d-flex justify-content-around col-12';
       this.shownNumber = 1;
       this.forNumber = 0;
-
-    } else if (arg <= 425) {   //Screen Size
-      this.class = 'card-container d-flex justify-content-around col-12';
-      this.shownNumber = 1;
-      this.forNumber = 0;
-
-    } else if (arg <= 768) {  //Screen Size
-      // Segregation of kind of issue result and the number of them
+    } else {
       if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumber = counter;
-        this.forNumber = counter-1;
+        if (arg <= 1440 || arg > 1400) {
+          this.Comicsclass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumber = counter
+          this.forNumber = counter-1;
+        }
       } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumber = counter-1;
-        this.forNumber = counter-2;
+        if (arg <= 991) {
+          this.Comicsclass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumber = counter-1;
+          this.forNumber = counter-2;
+        } else if (arg <= 1199 || arg > 1199) {
+          this.Comicsclass = 'card-container d-flex justify-content-around col-md-4';
+          this.shownNumber = counter;
+          this.forNumber = counter-1;
+        }
       } else {
-        this.shownNumber = 2;
-        this.forNumber = 1;
-      }
-
-    } else if (arg <= 1024) {  //Screen Size
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumber = counter
-        this.forNumber = counter-1;
-      } else if ((counter === 3)) {
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumber = counter
-        this.forNumber = counter-1;
-      } else {
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumber = 3;
-        this.forNumber = 2;
-      }
-
-    } else if (arg <= 1440 || arg > 1400) {
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumber = counter
-        this.forNumber = counter-1;
-      } else if ((counter === 3)) {
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumber = counter;
-        this.forNumber = counter-1;
-      } else {
-        this.class = 'card-container d-flex justify-content-around col-3';
-        this.shownNumber = 4;
-        this.forNumber = 3;
+        if (arg <= 991) {
+          this.Comicsclass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumber = 2;
+          this.forNumber = 1;
+        } else if (arg <= 1199) {
+          this.Comicsclass = 'card-container d-flex justify-content-around col-4';
+          this.shownNumber = 3;
+          this.forNumber = 2;
+        }else if (arg <= 1440 || arg > 1400) {
+          this.Comicsclass = 'card-container d-flex justify-content-around col-3';
+          this.shownNumber = 4;
+          this.forNumber = 3;
+         }
       }
     }
   }
 
-  // changing size for events
   changeSizeEvents(arg: any, counter: number) {
-    if (arg <= 375) {    //Screen Size
-      this.class = 'card-container d-flex justify-content-around col-12';
+    if (arg <= 767) {   //Screen Size
+      this.Eventsclass = 'card-container d-flex justify-content-around col-12';
       this.shownNumberE = 1;
       this.forNumberE = 0;
-
-    } else if (arg <= 425) {    //Screen Size
-      this.class = 'card-container d-flex justify-content-around col-12';
-      this.shownNumberE = 1;
-      this.forNumberE = 0;
-    } else if (arg <= 768) {   //Screen Size
-      // Segregation of kind of issue result and the number of them
+    } else {
       if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberE = counter;
-        this.forNumberE = counter-1;
+        if (arg <= 1440 || arg > 1400) {
+          this.Eventsclass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumberE = counter
+          this.forNumberE = counter-1;
+        }
       } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberE = counter-1;
-        this.forNumberE = counter-2;
+        if (arg <= 991) {
+          this.Eventsclass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumberE = counter-1;
+          this.forNumberE = counter-2;
+        } else if (arg <= 1199 || arg > 1199) {
+          this.Eventsclass = 'card-container d-flex justify-content-around col-md-4';
+          this.shownNumberE = counter;
+          this.forNumberE = counter-1;
+        }
       } else {
-        this.shownNumberE = 2;
-        this.forNumberE = 1;
-      } 
-    } else if (arg <= 768) {  //Screen Size
-      // Segregation of kind of issue result and the number of them
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberE = counter;
-        this.forNumberE = counter-1;
-      } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberE = counter-1;
-        this.forNumberE = counter-2;
-      } else {
-        this.shownNumberE = 2;
-        this.forNumberE = 1;
-      }
-
-    } else if (arg <= 1024) {  //Screen Size
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberE = counter;
-        this.forNumberE = counter-1;
-      } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumberE = counter
-        this.forNumberE = counter-1;
-      }else { 
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumberE = 3;
-        this.forNumberE = 2;
-      }
-    } else if (arg <= 1440 || arg > 1400) {
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberE = counter;
-        this.forNumberE = counter-1;
-      } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumberE = counter
-        this.forNumberE = counter-1;
-      } else {
-        this.class = 'card-container d-flex justify-content-around col-3';
-        this.shownNumberE = 4;
-        this.forNumberE = 3;
+        if (arg <= 991) {
+          this.Eventsclass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumberE = 2;
+          this.forNumberE = 1;
+        } else if (arg <= 1199) {
+          this.Eventsclass = 'card-container d-flex justify-content-around col-4';
+          this.shownNumberE = 3;
+          this.forNumberE = 2;
+        }else if (arg <= 1440 || arg > 1400) {
+          this.Eventsclass = 'card-container d-flex justify-content-around col-3';
+          this.shownNumberE = 4;
+          this.forNumberE = 3;
+         }
       }
     }
   }
 
   // changing size for series
   changeSizeSeries(arg: any, counter: number) {
-    if (arg <= 375) {    //Screen Size
-      this.class = 'card-container d-flex justify-content-around col-12';
+    if (arg <= 767) {   //Screen Size
+      this.Seriescslass = 'card-container d-flex justify-content-around col-12';
       this.shownNumberS = 1;
       this.forNumberS = 0;
-
-    } else if (arg <= 425) {    //Screen Size
-      this.class = 'card-container d-flex justify-content-around col-12';
-      this.shownNumberS = 1;
-      this.forNumberS = 0;
-    } else if (arg <= 768) {   //Screen Size
-      // Segregation of kind of issue result and the number of them
+    } else {
       if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberS = counter;
-        this.forNumberS = counter-1;
+        if (arg <= 1440 || arg > 1400) {
+          this.Seriescslass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumberS = counter
+          this.forNumberS = counter-1;
+        }
       } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberS = counter-1;
-        this.forNumberS = counter-2;
+        if (arg <= 991) {
+          this.Seriescslass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumberS = counter-1;
+          this.forNumberS = counter-2;
+        } else if (arg <= 1199 || arg > 1199) {
+          this.Seriescslass = 'card-container d-flex justify-content-around col-md-4';
+          this.shownNumberS = counter;
+          this.forNumberS = counter-1;
+        }
       } else {
-        this.shownNumberS = 2;
-        this.forNumberS = 1;
-      } 
-    } else if (arg <= 768) {  //Screen Size
-      // Segregation of kind of issue result and the number of them
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberS = counter;
-        this.forNumberS = counter-1;
-      } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberS = counter-1;
-        this.forNumberS = counter-2;
-      } else {
-        this.shownNumberS = 2;
-        this.forNumberS = 1;
-      }
-
-    } else if (arg <= 1024) {  //Screen Size
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberS = counter;
-        this.forNumberS = counter-1;
-      } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumberS = counter
-        this.forNumberS = counter-1;
-      }else { 
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumberS = 3;
-        this.forNumberS = 2;
-      }
-    } else if (arg <= 1440 || arg > 1400) {
-      if (counter === 2) {
-        this.class = 'card-container d-flex justify-content-around col-6';
-        this.shownNumberS = counter;
-        this.forNumberS = counter-1;
-      } else if (counter === 3) {
-        this.class = 'card-container d-flex justify-content-around col-4';
-        this.shownNumberS = counter
-        this.forNumberS = counter-1;
-      } else {
-        this.class = 'card-container d-flex justify-content-around col-3';
-        this.shownNumberS = 4;
-        this.forNumberS = 3;
+        if (arg <= 991) {
+          this.Seriescslass = 'card-container d-flex justify-content-around col-6';
+          this.shownNumberS = 2;
+          this.forNumberS = 1;
+        } else if (arg <= 1199) {
+          this.Seriescslass = 'card-container d-flex justify-content-around col-4';
+          this.shownNumberS = 3;
+          this.forNumberS = 2;
+        }else if (arg <= 1440 || arg > 1400) {
+          this.Seriescslass = 'card-container d-flex justify-content-around col-3';
+          this.shownNumberS = 4;
+          this.forNumberS = 3;
+         }
       }
     }
   }
-
-
 
 }

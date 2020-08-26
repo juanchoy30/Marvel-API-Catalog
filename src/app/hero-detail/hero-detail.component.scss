@@ -8,8 +8,11 @@
     }
 }
 
-div.row img {
+div.row {
+    margin: 0;
+    img {
     border: 2px solid $borderColor;
+    }
 }
 
 a, a:visited {

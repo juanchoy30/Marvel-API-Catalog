@@ -1,52 +1,55 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" routerLink='/home'>
-        <img src="../../assets/images/clipart1100252.png" alt="Marvel comic logo">
-        <!--(Colocar despues) https://www.clipartmax.com/middle/m2i8Z5d3G6K9H7b1_marvel-comics-logo-marvel-comics-logo-png/-->
-    </a>
-
-    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
-        &#9776;
-    </button>
-
-    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink='/home' (click)="isMenuCollapsed = true">Home</a>
-             </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink='/character-catalog' (click)="isMenuCollapsed = true">Catalog</a>
-            </li>
-        
-        </ul>
-
-        <div class="form-inline my-2 my-lg-0 mr-2">
-            <input type="text" 
-                id="character-name" 
-                class="form-control" 
-                placeholder="Search Character" 
-                [formControl]="queryField"
-                [ngbTypeahead]="search"                     
-                [resultFormatter]="resultFormatBandListValue"
-                [inputFormatter]="inputFormatBandListValue"
-                (selectItem)="selectedItem($event)"
-                #instance="ngbTypeahead"
-                #SearchInput>
-        </div>
+    <div class="container">
+        <a class="navbar-brand" routerLink='/home'>
+            <img src="../../assets/images/clipart1100252.png" alt="Marvel comic logo">
+            <!--(Colocar despues) https://www.clipartmax.com/middle/m2i8Z5d3G6K9H7b1_marvel-comics-logo-marvel-comics-logo-png/-->
+        </a>
+    
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+            &#9776;
+        </button>
+    
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+    
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink='/home' (click)="isMenuCollapsed = true">Home</a>
+                 </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink='/character-catalog' (click)="isMenuCollapsed = true">Catalog</a>
+                </li>
             
-        <div [hidden]="characterData">
-            <button class="btn btn-outline-light" disabled>Search</button>
+            </ul>
+    
+            <div class="form-inline my-2 my-lg-0 mr-2">
+                <input type="text" 
+                    id="character-name" 
+                    class="form-control" 
+                    placeholder="Search Character" 
+                    [formControl]="queryField"
+                    [ngbTypeahead]="search"                     
+                    [resultFormatter]="resultFormatBandListValue"
+                    [inputFormatter]="inputFormatBandListValue"
+                    (selectItem)="selectedItem($event)"
+                    #instance="ngbTypeahead"
+                    #SearchInput>
+            </div>
+                
+            <div [hidden]="characterData">
+                <button class="btn btn-outline-light btn-disabled" disabled>Search</button>
+            </div>
+            
+            <div *ngIf="characterData">
+                <button class="btn btn-danger" (click)="submit(characterData.id)" (click)="isMenuCollapsed = true">Search</button>
+            </div>
         </div>
-        
-        <div *ngIf="characterData">
-            <button class="btn btn-danger" (click)="submit(characterData.id)" (click)="isMenuCollapsed = true">Search</button>
+    
+        <div *ngIf="errMsg">
+            <h2>Error</h2>
+            <h4>Sorry character not found</h4>
         </div>
     </div>
-
-    <div *ngIf="errMsg">
-        <h2>Error</h2>
-        <h4>Sorry character not found</h4>
-    </div>
+    
 
     
 </nav>

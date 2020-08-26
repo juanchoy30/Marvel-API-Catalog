@@ -1,4 +1,4 @@
-<div>
+<div class="comicsComponent">
     <!--Comics-->
     <div>
         <div class="CarouselContent my-5" *ngIf="comics && resultsComics > 1">
@@ -7,7 +7,7 @@
                 <ng-template ngbSlide *ngFor="let comic of comics.results | slice:0:(comics.count-forNumber); let i = index">
                     <!--slice permits to cut the number of iterations starting with zero. 3 have to be substracted of the last one in order to avoid empty places-->
                     <div class="row carouselRow">
-                        <div [(class)]="class" *ngFor="let comic of comics.results| slice:i:i+shownNumber">
+                        <div [(class)]="Comicsclass" *ngFor="let comic of comics.results| slice:i:i+shownNumber">
                             <div class="flip-card" >
                                 <div class="flip-card-inner">
                                     <div class="card flip-card-front">
@@ -118,7 +118,7 @@
                 <ng-template ngbSlide *ngFor="let event of events.results | slice:0:(events.count-forNumberE); let i = index">
                     <!--slice permits to cut the number of iterations starting with zero. 3 have to be substracted of the last one in order to avoid empty places-->
                     <div class="row carouselRow">
-                        <div [(class)]="class" *ngFor="let event of events.results| slice:i:i+shownNumberE">
+                        <div [(class)]="Eventsclass" *ngFor="let event of events.results| slice:i:i+shownNumberE">
                             <div class="flip-card" >
                                 <div class="flip-card-inner">
                                     <div class="card flip-card-front">
@@ -228,7 +228,7 @@
                 <ng-template ngbSlide *ngFor="let serie of series.results | slice:0:(series.count-forNumberS); let i = index">
                     <!--slice permits to cut the number of iterations starting with zero. 3 have to be substracted of the last one in order to avoid empty places-->
                     <div class="row carouselRow">
-                        <div [(class)]="class" *ngFor="let serie of series.results| slice:i:i+shownNumberS">
+                        <div [(class)]="Seriescslass" *ngFor="let serie of series.results| slice:i:i+shownNumberS">
                             <div class="flip-card" >
                                 <div class="flip-card-inner">
                                     <div class="card flip-card-front">

@@ -7,6 +7,10 @@ $marvelColor: #F0131E;
 $borderColor: rgb(107, 107, 107);
 $textBackground: rgba(253, 253, 253, 0.931);
 
+div.container {
+    padding: 0;
+}
+
 header.jumbotron {
     background: $marvelColor;
     color: white;
@@ -14,6 +18,10 @@ header.jumbotron {
 
 body {
     background-image: url('../src/assets/images/pngguru.com.png');
+}
+
+.btn {
+    cursor: pointer;
 }
 
 div.descriptionBox {
