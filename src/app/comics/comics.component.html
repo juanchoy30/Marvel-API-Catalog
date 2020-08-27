@@ -1,7 +1,7 @@
 <div class="comicsComponent">
     <!--Comics-->
     <div>
-        <div class="CarouselContent my-5" *ngIf="comics && resultsComics > 1">
+        <div class="CarouselContent my-5" *ngIf="comics && resultsComics > 1"  [@expand]>
             <h2>Comics</h2>
             <ngb-carousel class="col-12">
                 <ng-template ngbSlide *ngFor="let comic of comics.results | slice:0:(comics.count-forNumber); let i = index">
@@ -21,21 +21,18 @@
                                             <p class="card-text"> {{ comic.description }}</p>
                 
                                             <h6 class="mt-3">Creators:</h6>
+
                                             <ul> <!--This double for is made so the creators data can be accessed-->
-                                                <ng-container *ngFor="let item of comics.results.creators">
-                                                    <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                                </ng-container>
+                                                <li *ngFor="let creator of comic.creators.items" >{{ creator.name }} ({{ creator.role }})</li>
                                             </ul>
-                
+
                                             <h6 class="mt-3">Character appearances:</h6>
                                             <ul>
-                                                <ng-container *ngFor="let item of comics.results.characters">
-                                                    <li *ngFor="let character of items.items">
-                                                        <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                            {{ character.name }}
-                                                        </a>
-                                                    </li>
-                                                </ng-container>
+                                                <li *ngFor="let character of comic.characters.items">
+                                                    <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                        {{ character.name }}
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -53,7 +50,7 @@
             <p>Sorry there are no comics available for this character</p>
         </div>
     
-        <div class="CarouselContent my-5" *ngIf="comics && resultsComics === 1">
+        <div class="CarouselContent my-5" *ngIf="comics && resultsComics === 1"  [@expand]>
             <h2>Comics</h2>
             <div class="row">
                 <div class="card-container d-flex justify-content-around col-12" *ngFor="let comic of comics.results">
@@ -71,20 +68,16 @@
         
                                     <h6 class="mt-3">Creators:</h6>
                                     <ul> <!--This double for is made so the creators data can be accessed-->
-                                        <ng-container *ngFor="let item of comics.results.creators">
-                                            <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                        </ng-container>
+                                        <li *ngFor="let creator of comic.creators.items" >{{ creator.name }} ({{ creator.role }})</li>
                                     </ul>
-        
+
                                     <h6 class="mt-3">Character appearances:</h6>
                                     <ul>
-                                        <ng-container *ngFor="let item of comics.results.characters">
-                                            <li *ngFor="let character of items.items">
-                                                <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                    {{ character.name }}
-                                                </a>
-                                            </li>
-                                        </ng-container>
+                                        <li *ngFor="let character of comic.characters.items">
+                                            <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                {{ character.name }}
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -112,7 +105,7 @@
 
     <!--Events-->
     <div>
-        <div class="CarouselContent my-5" *ngIf="events && resultsEvents > 1">
+        <div class="CarouselContent my-5" *ngIf="events && resultsEvents > 1"  [@expand]>
             <h2>Events</h2>
             <ngb-carousel class="col-12">
                 <ng-template ngbSlide *ngFor="let event of events.results | slice:0:(events.count-forNumberE); let i = index">
@@ -133,20 +126,16 @@
                 
                                             <h6 class="mt-3">Creators:</h6>
                                             <ul> <!--This double for is made so the creators data can be accessed-->
-                                                <ng-container *ngFor="let item of events.results.creators">
-                                                    <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                                </ng-container>
+                                                <li *ngFor="let creator of event.creators.items" >{{ creator.name }} ({{ creator.role }})</li>
                                             </ul>
-                
+
                                             <h6 class="mt-3">Character appearances:</h6>
                                             <ul>
-                                                <ng-container *ngFor="let item of events.results.characters">
-                                                    <li *ngFor="let character of items.items">
-                                                        <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                            {{ character.name }}
-                                                        </a>
-                                                    </li>
-                                                </ng-container>
+                                                <li *ngFor="let character of event.characters.items">
+                                                    <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                        {{ character.name }}
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -163,7 +152,7 @@
             <p>Sorry there are no events available for this character</p>
         </div>
     
-        <div class="CarouselContent my-5" *ngIf="events && resultsEvents === 1">
+        <div class="CarouselContent my-5" *ngIf="events && resultsEvents === 1"  [@expand]>
             <h2>Events</h2>
             <div class="row">
                 <div class="card-container d-flex justify-content-around col-12" *ngFor="let event of events.results">
@@ -181,20 +170,16 @@
         
                                     <h6 class="mt-3">Creators:</h6>
                                     <ul> <!--This double for is made so the creators data can be accessed-->
-                                        <ng-container *ngFor="let item of events.results.creators">
-                                            <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                        </ng-container>
+                                        <li *ngFor="let creator of event.creators.items" >{{ creator.name }} ({{ creator.role }})</li>
                                     </ul>
-        
+
                                     <h6 class="mt-3">Character appearances:</h6>
                                     <ul>
-                                        <ng-container *ngFor="let item of events.results.characters">
-                                            <li *ngFor="let character of items.items">
-                                                <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                    {{ character.name }}
-                                                </a>
-                                            </li>
-                                        </ng-container>
+                                        <li *ngFor="let character of event.characters.items">
+                                            <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                {{ character.name }}
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -222,7 +207,7 @@
 
     <!--Series-->
     <div>
-        <div class="CarouselContent my-5" *ngIf="series && resultsSeries > 1">
+        <div class="CarouselContent my-5" *ngIf="series && resultsSeries > 1"  [@expand]>
             <h2>Series</h2>
             <ngb-carousel class="col-12">
                 <ng-template ngbSlide *ngFor="let serie of series.results | slice:0:(series.count-forNumberS); let i = index">
@@ -243,20 +228,16 @@
                 
                                             <h6 class="mt-3">Creators:</h6>
                                             <ul> <!--This double for is made so the creators data can be accessed-->
-                                                <ng-container *ngFor="let item of series.results.creators">
-                                                    <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                                </ng-container>
+                                                <li *ngFor="let creator of serie.creators.items" >{{ creator.name }} ({{ creator.role }})</li>
                                             </ul>
-                
+
                                             <h6 class="mt-3">Character appearances:</h6>
                                             <ul>
-                                                <ng-container *ngFor="let item of series.results.characters">
-                                                    <li *ngFor="let character of items.items">
-                                                        <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                            {{ character.name }}
-                                                        </a>
-                                                    </li>
-                                                </ng-container>
+                                                <li *ngFor="let character of serie.characters.items">
+                                                    <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                        {{ character.name }}
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -273,7 +254,7 @@
             <p>Sorry there are no seriess available for this character</p>
         </div>
     
-        <div class="CarouselContent my-5" *ngIf="series && resultsSeries === 1">
+        <div class="CarouselContent my-5" *ngIf="series && resultsSeries === 1"  [@expand]>
             <h2>Series</h2>
             <div class="row">
                 <div class="card-container d-flex justify-content-around col-12" *ngFor="let serie of series.results">
@@ -291,20 +272,16 @@
         
                                     <h6 class="mt-3">Creators:</h6>
                                     <ul> <!--This double for is made so the creators data can be accessed-->
-                                        <ng-container *ngFor="let item of series.results.creators">
-                                            <li *ngFor="let creator of items.items">{{ creator.name }} ({{ creator.role }})</li>
-                                        </ng-container>
+                                        <li *ngFor="let creator of serie.creators.items" >{{ creator.name }} ({{ creator.role }})</li>
                                     </ul>
-        
+
                                     <h6 class="mt-3">Character appearances:</h6>
                                     <ul>
-                                        <ng-container *ngFor="let item of series.results.characters">
-                                            <li *ngFor="let character of items.items">
-                                                <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
-                                                    {{ character.name }}
-                                                </a>
-                                            </li>
-                                        </ng-container>
+                                        <li *ngFor="let character of serie.characters.items">
+                                            <a class="characterAccess" [routerLink]="['/character', character.resourceURI.substr(47)]">
+                                                {{ character.name }}
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

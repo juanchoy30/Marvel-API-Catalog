@@ -1,38 +1,46 @@
 import { Component, OnInit, ContentChild, HostListener  } from '@angular/core';
-import { Location } from '@angular/common';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { SearchServiceService } from '../services/search-service.service';
+import { flyInOut, expand, visibility } from '../animations/app.animations';
+import { changeSizePagination } from '../sizing/app.sizing';
 
 @Component({
   selector: 'app-heroes-catalog',
   templateUrl: './heroes-catalog.component.html',
-  styleUrls: ['./heroes-catalog.component.scss']
+  styleUrls: ['./heroes-catalog.component.scss'],
+  host: {
+    '[@flyInOut]':'true',
+    'style': 'display:block;'
+  },
+  animations: [ 
+    flyInOut(),
+    expand(),
+    visibility() ]
 })
 export class HeroesCatalogComponent implements OnInit {
 
   // For the pagination:
   // For ngBootstrap pagination use
   @ContentChild(NgbPagination) pagination: NgbPagination;
-  // Initial page 1=A
-  page: number = 1;
-  // Colection of pages, 270 for some reason gives until Z
-  collectionSize = 270;
-
-  // Sizing of the pagination
-  size: string = 'md';
+  page: number = 1;             // Initial page 1=A
+  collectionSize = 270;         // Colection of pages, 270 for some reason gives until Z
+  size: string = 'md';          // Sizing of the pagination
   maxSize: number = 10;
 
   // Variable definitions
   characters: any[];
   errMsg: string;
 
-  constructor(
-    private searchService: SearchServiceService,
-    private location: Location) { }
+  // Animations
+  visibility = 'shown';
+
+  constructor(private searchService: SearchServiceService) { }
 
   ngOnInit(): void {
     this.getCharactersByLetter(this.page);
     this.changeSize(window.screen.width); 
+    console.log(this.size);
+    console.log(this.maxSize);
   }
 
   // This will change the size of the pagination navbar with the change
@@ -46,9 +54,11 @@ export class HeroesCatalogComponent implements OnInit {
   // This function takes the first leter argument of a name and call all
   // the characters whose name stars with that letter.
   getCharactersByLetter(page: number) {
+    this.visibility = 'hidden'
     this.searchService.getCharacterNameStartsWith(this.getPageSymbol(page))
       .subscribe(characters => {
         this.characters = characters;
+        this.visibility = 'shown';
         console.log(this.characters);
       },
       errmess => {
@@ -66,22 +76,8 @@ export class HeroesCatalogComponent implements OnInit {
 
   // This function changes the size of the pagination navbar
   changeSize(arg: any) {
-    if (arg <= 375) { 
-      this.size = 'sm';
-      this.maxSize = 5;
-    } else if (arg <= 425) {
-      this.size = 'md';
-      this.maxSize = 5;
-    } else if (arg <= 768) {
-      this.size = 'md';
-      this.maxSize = 10;
-    } else if (arg <= 1024) {
-      this.size = 'md';
-      this.maxSize = 15;
-    } else if (arg <= 1440) {
-      this.size = 'md';
-      this.maxSize = 20;
-    }
+    this.size = changeSizePagination(arg)[0];
+    this.maxSize = changeSizePagination(arg)[1];
   }
 
 }
