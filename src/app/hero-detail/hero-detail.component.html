@@ -1,5 +1,5 @@
 <div class="container">
-    <div *ngIf="character" [@expand]>
+    <div *ngIf="character" [@visibility]="visibility" [@expand]>
         <div class="row">
             <div class="col-12 col-md-5 col-xl-3 my-1 pl-0">
                 <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" class="img-fluid" alt={{character.name}}>

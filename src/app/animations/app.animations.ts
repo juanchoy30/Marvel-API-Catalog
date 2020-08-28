@@ -8,7 +8,7 @@ export function visibility() {
         state('hidden', style({
           opacity: 0
         })),
-        transition('* => *', animate('0.5s ease-in-out'))
+        transition('* => *', animate('600ms ease-in-out'))
       ]);
 }
 

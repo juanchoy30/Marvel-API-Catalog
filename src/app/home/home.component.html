@@ -1,1 +1,30 @@
-<p>home works!</p>
+<div class="container">
+    <h1>Marvel character Library</h1>
+
+    <div class="row d-flex justify-content-center">
+        <div class="imageContent col-12 col-md-6" *ngIf="character1">
+            <img class="img-fluid" src="{{character1.thumbnail.path}}.{{character1.thumbnail.extension}}" alt="{{character1.name}}">
+        </div>
+        
+        <div class="imageContent col-12 col-md-6" *ngIf="character2">
+            <img class="img-fluid" src="{{character2.thumbnail.path}}.{{character2.thumbnail.extension}}" alt="{{character2.name}}">
+        </div>
+        
+        <div class="imageContent col-12 col-md-6" *ngIf="character3">
+            <img class="img-fluid" src="{{character3.thumbnail.path}}.{{character3.thumbnail.extension}}" alt="{{character3.name}}">
+        </div>
+        
+        <div class="imageContent col-12 col-md-6" *ngIf="character4">
+            <img class="img-fluid" src="{{character4.thumbnail.path}}.{{character4.thumbnail.extension}}" alt="{{character4.name}}">
+        </div>
+    
+        <div class="imageContent col-12 col-md-6" *ngIf="character5">
+            <img class="img-fluid" src="{{character5.thumbnail.path}}.{{character5.thumbnail.extension}}" alt="{{character5.name}}">
+        </div>
+    
+        <div class="imageContent col-12 col-md-6" *ngIf="character6">
+            <img class="img-fluid" src="{{character6.thumbnail.path}}.{{character6.thumbnail.extension}}" alt="{{character6.name}}">
+        </div>
+    </div>
+    
+</div>

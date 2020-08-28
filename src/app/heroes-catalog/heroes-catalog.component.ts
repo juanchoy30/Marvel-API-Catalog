@@ -39,8 +39,6 @@ export class HeroesCatalogComponent implements OnInit {
   ngOnInit(): void {
     this.getCharactersByLetter(this.page);
     this.changeSize(window.screen.width); 
-    console.log(this.size);
-    console.log(this.maxSize);
   }
 
   // This will change the size of the pagination navbar with the change
@@ -59,7 +57,6 @@ export class HeroesCatalogComponent implements OnInit {
       .subscribe(characters => {
         this.characters = characters;
         this.visibility = 'shown';
-        console.log(this.characters);
       },
       errmess => {
         this.errMsg = <any>errmess;

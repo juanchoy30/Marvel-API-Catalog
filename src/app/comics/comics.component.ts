@@ -5,7 +5,6 @@ import { switchMap } from 'rxjs/operators';
 import { expand } from '../animations/app.animations';
 import { changeSizeCarousel } from '../sizing/app.sizing';
 
-
 import { IssuesService } from '../services/issues.service';
 
 @Component({
@@ -51,7 +50,6 @@ export class ComicsComponent implements OnInit {
 
   ngOnInit(): void {
     const width= window.screen.availWidth;
-    console.log(width);
     this.getComics(width);
     this.getEvents(width);
     this.getSeries(width);
@@ -63,10 +61,8 @@ export class ComicsComponent implements OnInit {
       return this.issuesService.getComicCharacter(params['id'])}))
         .subscribe( comics => {
           this.comics = comics;
-          console.log(this.comics);
           this.resultsComics = this.comics.count;
           if ( this.resultsComics <= 1) { //This if avoids the changeSize function if the number of issues is less or equal to 1
-            console.log(this.resultsComics);
           } else {
             this.changeSizeComics(width, this.resultsComics); // This function sizes the carousel
           }

@@ -30,7 +30,6 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
 
     // This method gets the call GET if user type heroes name
-    console.log(this.searchInput);
     fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         map((event: any) => {
@@ -45,7 +44,6 @@ export class NavBarComponent implements OnInit {
           .subscribe(characterData => {
             this.isSearching = false;
             this.characterData = characterData;
-            console.log(this.characterData);
           },
           errmess => {
             this.errMsg = <any>errmess;
@@ -82,11 +80,10 @@ export class NavBarComponent implements OnInit {
   // The get method on the searchservice
   selectedItem(item: any){
     this.clickedItem = item.item.name;
-    console.log(this.clickedItem);
     this.searchService.getCharacterByName(this.clickedItem)
     .subscribe(characterData => {
       this.characterData = characterData;
-      console.log(this.characterData);
+      this.submit(characterData.id);
     });
 
   }
@@ -95,6 +92,8 @@ export class NavBarComponent implements OnInit {
   // correspondent url
   submit(id: any){
     this.router.navigate(['/character', id]); //your router URL need to pass it here
+    this.queryField.reset();
+    delete(this.characterData);
   }
 
 }
