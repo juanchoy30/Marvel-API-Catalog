@@ -2,8 +2,9 @@
     <h1>Marvel character Library</h1>
 
     <div class="row d-flex justify-content-center">
-        <div class="imageContent col-12 col-md-6" *ngIf="character1">
+        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character1">
             <img class="img-fluid" src="{{character1.thumbnail.path}}.{{character1.thumbnail.extension}}" alt="{{character1.name}}">
+            <h3>{{character1.name}}</h3>
         </div>
         <div [hidden]="character1 || errMess">
             <div class="spinner-grow text-danger" role="status">
@@ -17,8 +18,9 @@
             <h4>{{errMsg}}</h4>
         </div>
         
-        <div class="imageContent col-12 col-md-6" *ngIf="character2">
+        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character2">
             <img class="img-fluid" src="{{character2.thumbnail.path}}.{{character2.thumbnail.extension}}" alt="{{character2.name}}">
+            <h3>{{character2.name}}</h3>
         </div>
         <div [hidden]="character2 || errMess">
             <div class="spinner-grow text-danger" role="status">
@@ -32,8 +34,9 @@
             <h4>{{errMsg}}</h4>
         </div>
         
-        <div class="imageContent col-12 col-md-6" *ngIf="character3">
+        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character3">
             <img class="img-fluid" src="{{character3.thumbnail.path}}.{{character3.thumbnail.extension}}" alt="{{character3.name}}">
+            <h3>{{character3.name}}</h3>
         </div>
         <div [hidden]="character3 || errMess">
             <div class="spinner-grow text-danger" role="status">
@@ -47,8 +50,9 @@
             <h4>{{errMsg}}</h4>
         </div>
         
-        <div class="imageContent col-12 col-md-6" *ngIf="character4">
+        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character4">
             <img class="img-fluid" src="{{character4.thumbnail.path}}.{{character4.thumbnail.extension}}" alt="{{character4.name}}">
+            <h3>{{character4.name}}</h3>
         </div>
         <div [hidden]="character4 || errMess">
             <div class="spinner-grow text-danger" role="status">
@@ -62,35 +66,7 @@
             <h4>{{errMsg}}</h4>
         </div>
     
-        <div class="imageContent col-12 col-md-6" *ngIf="character5">
-            <img class="img-fluid" src="{{character5.thumbnail.path}}.{{character5.thumbnail.extension}}" alt="{{character5.name}}">
-        </div>
-        <div [hidden]="character5 || errMess">
-            <div class="spinner-grow text-danger" role="status">
-              <span class="sr-only"></span>
-            </div>
-            <h4>Loading . . . Please Wait</h4>
-        </div>
-    
-        <div *ngIf="character5 === undefined">
-            <h2>Error</h2>
-            <h4>{{errMsg}}</h4>
-        </div>
-    
-        <div class="imageContent col-12 col-md-6" *ngIf="character6">
-            <img class="img-fluid" src="{{character6.thumbnail.path}}.{{character6.thumbnail.extension}}" alt="{{character6.name}}">
-        </div>
-        <div [hidden]="character6 || errMess">
-            <div class="spinner-grow text-danger" role="status">
-              <span class="sr-only"></span>
-            </div>
-            <h4>Loading . . . Please Wait</h4>
-        </div>
-    
-        <div *ngIf="character6 === undefined">
-            <h2>Error</h2>
-            <h4>{{errMsg}}</h4>
-        </div>
+
     </div>
     
 </div>
