@@ -3,6 +3,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { CharacterService } from '../services/character.service';
+import { ScrollToTopService } from '../services/scroll-to-top.service';
 import { flyInOut, expand, visibility   } from '../animations/app.animations';
 
 
@@ -26,11 +27,14 @@ export class HeroDetailComponent implements OnInit {
   // Animations
   visibility = 'shown';
 
-  constructor(private characterService: CharacterService,
+  constructor(
+    private characterService: CharacterService,
+    private scrollToTopService: ScrollToTopService,
     private route: ActivatedRoute,
     private location: Location) { }
 
   ngOnInit(): void {
+    this.scrollToTopService.setScrollTop();
     this.getTheCharacter();
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, HostListener, Input} from '@angular/core';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap } from 'rxjs/operators';
 import { expand } from '../animations/app.animations';
@@ -46,6 +46,7 @@ export class ComicsComponent implements OnInit {
   constructor(
     private issuesService: IssuesService,
     private route: ActivatedRoute,
+    private router: Router,
     private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -138,6 +139,13 @@ export class ComicsComponent implements OnInit {
     this.Seriescslass = changesizeCarouselArray[0];
     this.shownNumberS = changesizeCarouselArray[1];
     this.forNumberS = changesizeCarouselArray[2];
+  }
+
+  onRouterLink(id: any) {
+    this.router.navigateByUrl('/', { skipLocationChange:true })
+      .then(()=> {
+        this.router.navigate(['/character', id]);
+      }); //your router URL need to pass it here (https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular)
   }
 
 }

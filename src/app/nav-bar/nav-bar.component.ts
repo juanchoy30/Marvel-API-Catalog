@@ -91,9 +91,11 @@ export class NavBarComponent implements OnInit {
   // This submition method will allow the search button to appear with the
   // correspondent url
   submit(id: any){
-    this.router.navigate(['/character', id]); //your router URL need to pass it here
+    this.router.navigateByUrl('/', { skipLocationChange:true })
+      .then(()=> {
+        this.router.navigate(['/character', id]);
+      }); //your router URL need to pass it here (https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular)
     this.queryField.reset();
-    delete(this.characterData);
   }
 
 }

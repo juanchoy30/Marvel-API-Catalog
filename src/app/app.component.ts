@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'marvelApp';
-
+  /*
   onActivate(event) {  // Scrolls to top when component changes
     let scrollToTop = window.setInterval(() => {
         let pos = window.pageYOffset;
@@ -17,6 +17,6 @@ export class AppComponent {
             window.clearInterval(scrollToTop);
         }
     }, 16);
-}
+}*/
 
 }

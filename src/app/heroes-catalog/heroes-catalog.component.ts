@@ -1,6 +1,7 @@
 import { Component, OnInit, ContentChild, HostListener  } from '@angular/core';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { SearchServiceService } from '../services/search-service.service';
+import { ScrollToTopService } from '../services/scroll-to-top.service';
 import { flyInOut, expand, visibility } from '../animations/app.animations';
 import { changeSizePagination } from '../sizing/app.sizing';
 
@@ -34,9 +35,12 @@ export class HeroesCatalogComponent implements OnInit {
   // Animations
   visibility = 'shown';
 
-  constructor(private searchService: SearchServiceService) { }
+  constructor(
+    private searchService: SearchServiceService,
+    private scrollToTopService: ScrollToTopService) { }
 
   ngOnInit(): void {
+    this.scrollToTopService.setScrollTop();
     this.getCharactersByLetter(this.page);
     this.changeSize(window.screen.width); 
   }

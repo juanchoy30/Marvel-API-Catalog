@@ -16,6 +16,7 @@ import { CharacterService } from './services/character.service';
 import { SearchServiceService } from './services/search-service.service';
 import { IssuesService } from './services/issues.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import { ScrollToTopService } from './services/scroll-to-top.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -51,6 +52,7 @@ import { HomeComponent } from './home/home.component';
     SearchServiceService,
     IssuesService,
     ProcessHTTPMsgService,
+    ScrollToTopService,
     { provide: 'BaseURL', useValue: baseURL }
   ],
   bootstrap: [AppComponent]

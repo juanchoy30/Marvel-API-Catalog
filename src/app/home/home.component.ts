@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { flyInOut } from '../animations/app.animations';
 import { SearchServiceService } from '../services/search-service.service';
-import { featuredCharacters } from '../shared/featuredCharacters';
+import { ScrollToTopService } from '../services/scroll-to-top.service';
 
 
 @Component({
@@ -24,9 +24,12 @@ export class HomeComponent implements OnInit {
   character6: any;
   errMsg: string;                // This handdles the http error
 
-  constructor(private searchService: SearchServiceService,) { }
+  constructor(
+    private searchService: SearchServiceService,
+    private scrollToTopService: ScrollToTopService) { }
 
   ngOnInit(): void {
+    this.scrollToTopService.setScrollTop();
     this.getCharacter1();
     this.getCharacter2();
     this.getCharacter3();

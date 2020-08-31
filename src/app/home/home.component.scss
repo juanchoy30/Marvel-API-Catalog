@@ -1,11 +1,19 @@
+.container {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    h1 {
+        margin-bottom: 40px;
+    }
+}
 div.row {
-    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0;
 }
 div.imageContent {
     padding: 0;
-    width: 100%;
+    max-width: 100%;
     img.img-fluid {
-        width: 95%;
+        max-width: 100%;
     }
 }
 
