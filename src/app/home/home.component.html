@@ -2,11 +2,13 @@
     <h1>Marvel character Library</h1>
 
     <div class="row d-flex justify-content-center">
-        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character1">
-            <img class="img-fluid" src="{{character1.thumbnail.path}}.{{character1.thumbnail.extension}}" alt="{{character1.name}}">
-            <h3>{{character1.name}}</h3>
+        <div class="imageContent col-6 d-flex justify-content-center" *ngIf="character1">
+            <a class="d-flex justify-content-center" [routerLink]="['/character', character1.id]">
+                <img class="img-fluid" src="{{character1.thumbnail.path}}.{{character1.thumbnail.extension}}" alt="{{character1.name}}">
+                <h3 class="d-none d-sm-block">{{character1.name}}</h3>
+            </a>
         </div>
-        <div [hidden]="character1 || errMess">
+        <div [hidden]="character1 || errMsg">
             <div class="spinner-grow text-danger" role="status">
               <span class="sr-only"></span>
             </div>
@@ -18,11 +20,13 @@
             <h4>{{errMsg}}</h4>
         </div>
         
-        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character2">
-            <img class="img-fluid" src="{{character2.thumbnail.path}}.{{character2.thumbnail.extension}}" alt="{{character2.name}}">
-            <h3>{{character2.name}}</h3>
+        <div class="imageContent col-6 d-flex justify-content-center" *ngIf="character2">
+            <a class="d-flex justify-content-center" [routerLink]="['/character', character2.id]">
+                <img class="img-fluid" src="{{character2.thumbnail.path}}.{{character2.thumbnail.extension}}" alt="{{character2.name}}">
+                <h3 class="d-none d-sm-block">{{character2.name}}</h3>
+            </a>
         </div>
-        <div [hidden]="character2 || errMess">
+        <div [hidden]="character2 || errMsg">
             <div class="spinner-grow text-danger" role="status">
               <span class="sr-only"></span>
             </div>
@@ -34,11 +38,13 @@
             <h4>{{errMsg}}</h4>
         </div>
         
-        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character3">
-            <img class="img-fluid" src="{{character3.thumbnail.path}}.{{character3.thumbnail.extension}}" alt="{{character3.name}}">
-            <h3>{{character3.name}}</h3>
+        <div class="imageContent col-6 d-flex justify-content-center" *ngIf="character3">
+            <a class="d-flex justify-content-center" [routerLink]="['/character', character3.id]">
+                <img class="img-fluid" src="{{character3.thumbnail.path}}.{{character3.thumbnail.extension}}" alt="{{character3.name}}">
+                <h3 class="d-none d-sm-block">{{character3.name}}</h3>
+            </a>
         </div>
-        <div [hidden]="character3 || errMess">
+        <div [hidden]="character3 || errMsg">
             <div class="spinner-grow text-danger" role="status">
               <span class="sr-only"></span>
             </div>
@@ -50,11 +56,13 @@
             <h4>{{errMsg}}</h4>
         </div>
         
-        <div class="imageContent col-12 col-md-6 d-flex justify-content-center" *ngIf="character4">
-            <img class="img-fluid" src="{{character4.thumbnail.path}}.{{character4.thumbnail.extension}}" alt="{{character4.name}}">
-            <h3>{{character4.name}}</h3>
+        <div class="imageContent col-6 d-flex justify-content-center" *ngIf="character4">
+            <a class="d-flex justify-content-center" [routerLink]="['/character', character4.id]">
+                <img class="img-fluid" src="{{character4.thumbnail.path}}.{{character4.thumbnail.extension}}" alt="{{character4.name}}">
+                <h3 class="d-none d-sm-block">{{character4.name}}</h3> 
+            </a>
         </div>
-        <div [hidden]="character4 || errMess">
+        <div [hidden]="character4 || errMsg">
             <div class="spinner-grow text-danger" role="status">
               <span class="sr-only"></span>
             </div>

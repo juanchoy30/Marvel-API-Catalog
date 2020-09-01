@@ -1,6 +1,6 @@
 .container {
     margin-top: 80px;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
     h1 {
         margin-bottom: 40px;
     }
@@ -12,16 +12,29 @@ div.row {
 div.imageContent {
     padding: 0;
     max-width: 100%;
-    img.img-fluid {
-        max-width: 100%;
+    a {
+        transition: 0.3s;
+        z-index: 0.5;
+        img.img-fluid {
+            max-width: 100%;
+        }
+        h3 {
+            position: absolute;
+            z-index: 1;
+            bottom: 10px;
+            color: white;
+            text-shadow: 0px 2px 14px #000000;
+        }
     }
-    h3 {
-        position: absolute;
+    a:hover {
         z-index: 1;
-        bottom: 10px;
-        color: white;
-        text-shadow: 0px 2px 14px #000000;
+        transform: scale(1.01);
+        border: 1px solid rgb(0, 0, 0);
     }
+}
+
+div.media img {
+    width: 300px;
 }
 
 

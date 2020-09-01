@@ -7,7 +7,10 @@ $marvelColor: #F0131E;
 $borderColor: rgb(107, 107, 107);
 $textBackground: rgba(253, 253, 253, 0.931);
 
-
+body {
+    background-color: lightgray !important;
+}
+    
 
 div.container {
     padding: 0;

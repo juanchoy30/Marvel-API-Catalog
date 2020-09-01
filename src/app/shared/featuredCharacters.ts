@@ -39,7 +39,6 @@ export let featuredCharacters: string[] = [
     'groot',
     'human torch',
     'invisible woman',
-    'james howlett',
     'juggernaut',
     'maria hill',
     'nebula',

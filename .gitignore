@@ -4,7 +4,6 @@
 /src/app/shared/validationKeys.ts
 
 # compiled output
-/dist
 /tmp
 /out-tsc
 

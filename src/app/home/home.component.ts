@@ -3,7 +3,6 @@ import { flyInOut } from '../animations/app.animations';
 import { SearchServiceService } from '../services/search-service.service';
 import { ScrollToTopService } from '../services/scroll-to-top.service';
 import { featuredCharacters } from '../shared/featuredCharacters';
-import { create } from 'domain';
 
 
 @Component({
